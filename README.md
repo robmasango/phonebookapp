@@ -11,7 +11,7 @@ You will need the following tools:
 * [Visual Studio Code or Visual Studio 2019 Preview](https://visualstudio.microsoft.com/vs/preview/)
 * [.NET Core SDK 3](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 * [Node.js](https://nodejs.org/en/) (version 10 or later) with npm (version 6.9.0 or later)
-* [Yarn] (https://yarnpkg.com/en/docs/install#windows-stable) latest version
+* [Yarn](https://yarnpkg.com/en/docs/install#windows-stable) (latest version)
 
  ### Setup
 Follow these steps to get your development environment set up:
@@ -30,7 +30,7 @@ Follow these steps to get your development environment set up:
 	 run the project 
 	 ```
   6. Browser will open with web app [https://localhost:44395/](https://localhost:44395/) for the Web UI
-  7. Navigate to here for the [Swagger UI] (https://localhost:44395/swagger/index.html)
+  7. Navigate to here for the Swagger UI (https://localhost:44395/swagger/index.html)
 
 ## Technologies
 * ASP.NET Core 3 
