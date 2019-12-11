@@ -1,0 +1,44 @@
+<form  (ngSubmit)="onSubmit(phonenumberFrm)"  [formGroup]="phonenumberFrm">
+  <h2>{{data.modalTitle}}</h2>
+  
+  <div>
+      <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+      <mat-error *ngIf="formErrors.name">
+        {{ formErrors.name }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="email" formControlName="email">
+      <mat-error *ngIf="formErrors.email">
+        {{ formErrors.email }}
+      </mat-error>
+    </mat-form-field>
+  
+  </div>
+  <div>
+    <mat-form-field appearance="outline" hintLabel="+27 then number without the 0">
+      <mat-label>Number</mat-label>
+      <input type="tel" matInput placeholder="number" formControlName="number">
+      <mat-error *ngIf="formErrors.number">
+        {{ formErrors.number }}
+      </mat-error>
+    </mat-form-field>
+  
+  </div>
+  
+
+
+  <div>
+  
+    <button type="button" mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>&nbsp; &nbsp; 
+    <button type="submit" mat-raised-button color="primary" [disabled]="phonenumberFrm.invalid">{{data.modalBtnTitle}}</button>
+  </div>
+  
+  </form>

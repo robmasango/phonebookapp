@@ -1,0 +1,31 @@
+/* .contactlist{
+  text-align: center;
+} */
+
+.spinner{
+  top: 45%;
+  left: 47%;
+  position: fixed;
+}
+.contactlist-container, #paginator {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 1200px;
+  max-height: 700px;
+  overflow: auto;
+  margin: 0 auto;
+}
+
+.search-hero {
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin:auto;
+}
+
+.form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+.form-control::placeholder  {
+  font-family: FontAwesome;
+}

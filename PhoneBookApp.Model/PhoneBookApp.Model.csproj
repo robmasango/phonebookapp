@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\TestApp\**" />
+    <EmbeddedResource Remove="Entities\TestApp\**" />
+    <None Remove="Entities\TestApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\BlogPost.cs" />
+    <Compile Remove="Entities\DepartmentDocument.cs" />
+    <Compile Remove="Entities\UserDepartment.cs" />
+    <Compile Remove="Entities\UserDocument.cs" />
+    <Compile Remove="EntityMappings\PhoneBook\OrderItemMapping.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="22.0.2" />
+    <!--<PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.6"><PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>-->
+    <!--<Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>-->
+    <!--</PackageReference>-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+</Project>

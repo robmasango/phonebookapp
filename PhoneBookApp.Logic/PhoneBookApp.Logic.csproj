@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>PhoneBookApp.Logic</AssemblyName>
+    <RootNamespace>PhoneBookApp.Logic</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repositories\ApplicationUser\**" />
+    <Compile Remove="Utils\**" />
+    <EmbeddedResource Remove="Repositories\ApplicationUser\**" />
+    <EmbeddedResource Remove="Utils\**" />
+    <None Remove="Repositories\ApplicationUser\**" />
+    <None Remove="Utils\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Abstract\IApplicationUserRepository.cs" />
+    <Compile Remove="Abstract\IApplicationUserRolePermissionRepository.cs" />
+    <Compile Remove="Abstract\IDatabaseConnectionService.cs" />
+    <Compile Remove="Abstract\IRolesRepository.cs" />
+    <Compile Remove="Abstract\IUsersClaimsRepository.cs" />
+    <Compile Remove="Abstract\IUsersLoginsRepository.cs" />
+    <Compile Remove="Abstract\IUsersRepository.cs" />
+    <Compile Remove="Abstract\IUsersRolesRepository.cs" />
+    <Compile Remove="Repositories\DatabaseConnectionService.cs" />
+    <Compile Remove="Repositories\PhoneBook\CustomerRepository.cs" />
+    <Compile Remove="Repositories\PhoneBook\ItemRepository.cs" />
+    <Compile Remove="Repositories\PhoneBook\OrderItemRepository.cs" />
+    <Compile Remove="Repositories\PhoneBook\OrderRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Abstract\IRolePermissionRepository.cs.old" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PhoneBookApp.Model\PhoneBookApp.Model.csproj" />
+  </ItemGroup>
+
+</Project>
