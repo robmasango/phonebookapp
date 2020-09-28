@@ -57,7 +57,7 @@ namespace PhoneBookApp.Logic.Repositories
         }
         public async Task<T> FindSingle(int id)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(x => x.id == id);
+            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<T> FindSingle(Expression<Func<T, bool>> predicate)

@@ -21,7 +21,7 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
 
         public async Task<PHB_PhoneBook> GetPhoneBookByID(int id)
         {
-            return await FindSingle(subject => subject.id == id);
+            return await FindSingle(subject => subject.Id == id);
         }
 
         public async Task<List<PHB_PhoneBook>> GetAllPhoneBooks()
@@ -36,7 +36,7 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
 
         public async Task<PHB_PhoneBook> GetPhoneBook(string name)
         {
-            return await FindSingle(a => a.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return await FindSingle(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         public async Task<int> CountPhoneBooks()
@@ -52,7 +52,7 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
 
         public async Task DeletePhoneBook(int Id)
         {
-            DeleteWhere(c => c.id == Id);
+            DeleteWhere(c => c.Id == Id);
             await Commit();
         }
 
@@ -66,7 +66,7 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
         public async Task<List<PHB_PhoneBook>> GetPhoneBooksOrdered(string filter = null)
         {
             var record = await _context.Set<PHB_PhoneBook>()
-               .OrderBy(c => c.id)
+               .OrderBy(c => c.Id)
                 .ToListAsync();
 
             return record;

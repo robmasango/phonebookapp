@@ -337,7 +337,7 @@ namespace PhoneBookApp.Web.Controllers
         else
         {
           var PhoneBook = await _PhoneBookApi.GetFirstPhoneBook();
-          item.PhonebookId = PhoneBook.Id;
+          item.PhoneBookId = PhoneBook.Id;
           await _PhoneNumberApi.AddPhoneNumber(item.ReverseMap());
 
           return Ok(new { message = "PhoneNumber is added successfully." });
@@ -377,7 +377,7 @@ namespace PhoneBookApp.Web.Controllers
             return NotFound(new { message = "Phone number not found" });
           }
 
-          number.PhonebookId = phonebook.Id;
+          number.PhoneBookId = phonebook.Id;
           number.Name = updateditem.Name;
           number.Email = updateditem.Email;
           number.Number = updateditem.Number;

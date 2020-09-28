@@ -6,8 +6,8 @@ import {MatSort} from '@angular/material/sort';
 import { PhonebookformComponent } from '../phonebookform/phonebookform.component';
 
 import { PhoneBookService } from '../services/phonebook.service';
-import { IPhoneNumber } from '../model/phonenumber';
-import { IPhoneBook } from '../model/phonebook';
+import { PhoneNumber } from '../model/phonenumber';
+import { PhoneBook } from '../model/phonebook';
 import { DBOperation } from '../shared/DBOperation';
 import { Global } from '../shared/Global';
 
@@ -17,9 +17,9 @@ import { Global } from '../shared/Global';
   styleUrls: ['./phonebooklist.component.css']
 })
 export class PhoneBooklistComponent implements OnInit {
-  phonenumbers: IPhoneNumber[];
-  contact: IPhoneNumber;
-  phonebook: IPhoneBook;
+  phonenumbers: PhoneNumber[];
+  contact: PhoneNumber;
+  phonebook: PhoneBook;
   loadingState: boolean;
   dbops: DBOperation;
   modalTitle: string;
@@ -31,8 +31,8 @@ export class PhoneBooklistComponent implements OnInit {
   // set columns that will need to show in listing table
   displayedColumns = ['name', 'email', 'number','action'];
   // setting up datasource for material table
-  dataSource = new MatTableDataSource<IPhoneNumber>();
-  dataSourcePhone = new MatTableDataSource<IPhoneBook>();
+  dataSource = new MatTableDataSource<PhoneNumber>();
+  dataSourcePhone = new MatTableDataSource<PhoneBook>();
 
   constructor(public snackBar: MatSnackBar, private _contactService: PhoneBookService, private dialog: MatDialog) { }
 

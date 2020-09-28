@@ -6,7 +6,7 @@ namespace PhoneBookApp.Web.Models
   public class PhoneNumberViewModel
   {
     public int Id { get; set; }
-    public int PhonebookId { get; set; }
+    public int PhoneBookId { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string Number { get; set; }
@@ -24,7 +24,7 @@ namespace PhoneBookApp.Web.Models
     public PhoneNumberViewModel MapSinglePhoneNumber(PHB_PhoneNumber d)
     {
       Id = d.Id;
-      PhonebookId = d.PhonebookId;
+      PhoneBookId = d.PhoneBookId;
       Name = d.Name;
       Email = d.Email;
       Number = d.Number;
@@ -36,7 +36,7 @@ namespace PhoneBookApp.Web.Models
       return new PHB_PhoneNumber()
         {
         Id = this.Id,
-        PhonebookId = this.PhonebookId,
+        PhoneBookId = this.PhoneBookId,
         Name = this.Name,
         Email = this.Email,
         Number = this.Number,

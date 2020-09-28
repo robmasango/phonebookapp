@@ -26,7 +26,7 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
         public async Task<List<PHB_PhoneNumber>> GetPhoneNumberByPhoneBookID(int PhoneBookID)
         {
           var PHB_PhoneNumber = await _context.Set<PHB_PhoneNumber>()
-          .Where(x => x.phonebookid == PhoneBookID)
+          .Where(x => x.PhoneBookId == PhoneBookID)
           .ToListAsync();
 
           return PHB_PhoneNumber;
@@ -51,7 +51,7 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
 
         public async Task DeletePhoneNumber(int Id)
         {
-            DeleteWhere(c => c.id == Id);
+            DeleteWhere(c => c.Id == Id);
             await Commit();
         }
 
@@ -64,7 +64,7 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
         public async Task<List<PHB_PhoneNumber>> GetPhoneNumbersOrdered(string filter = null)
         {
             var record = await _context.Set<PHB_PhoneNumber>()
-               .OrderBy(c => c.id)
+               .OrderBy(c => c.Id)
                 .ToListAsync();
 
             return record;

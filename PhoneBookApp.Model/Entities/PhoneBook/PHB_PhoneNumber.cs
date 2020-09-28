@@ -6,7 +6,7 @@ namespace PhoneBookApp.Model.Entities.PhoneBook
 
     [Key]
     public int Id { get; set; }
-    public int PhonebookId { get; set; }
+    public int PhoneBookId { get; set; }
     [Required]
     public string Email { get; set; }
     [Required]

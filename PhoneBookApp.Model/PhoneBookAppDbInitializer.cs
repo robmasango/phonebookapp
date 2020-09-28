@@ -26,7 +26,7 @@ namespace PhoneBookApp.Model
     {
       if (!await _context.PHB_PhoneBook.AnyAsync())
       {
-        PHB_PhoneBook phonebook = new PHB_PhoneBook() { name = "Ureka PhoneBook"};
+        PHB_PhoneBook phonebook = new PHB_PhoneBook() { Name = "Ureka PhoneBook"};
 
         await _context.PHB_PhoneBook.AddAsync(phonebook);
 
@@ -41,26 +41,26 @@ namespace PhoneBookApp.Model
       {
         PHB_PhoneNumber num = new PHB_PhoneNumber()
         {
-          phonebookid = 1,
-          name = "Robert One",
-          email = "rob1@gmail.com",
-          number = "0727601650",
+          PhoneBookId = 1,
+          Name = "Robert One",
+          Email = "rob1@gmail.com",
+          Number = "0727601650",
         };
 
         PHB_PhoneNumber num1 = new PHB_PhoneNumber()
         {
-          phonebookid = 1,
-          name = "Robert Two",
-          email = "rob2@gmail.com",
-          number = "0727601651",
+          PhoneBookId = 1,
+          Name = "Robert Two",
+          Email = "rob2@gmail.com",
+          Number = "0727601651",
         };
 
         PHB_PhoneNumber num2 = new PHB_PhoneNumber()
         {
-          phonebookid = 1,
-          name = "Robert Three",
-          email = "rob3@gmail.com",
-          number = "0727601652",
+          PhoneBookId = 1,
+          Name = "Robert Three",
+          Email = "rob3@gmail.com",
+          Number = "0727601652",
         };
 
         await _context.PHB_PhoneNumber.AddAsync(num);

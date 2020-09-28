@@ -1,6 +1,6 @@
-export interface IPhoneNumber {
+export interface PhoneNumber {
         id: number;
-        phonebookid: number;
+        phoneBookId: number;
         name: string;
         email: string;
         number: string;

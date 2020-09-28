@@ -6,7 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { IPhoneNumber } from '../model/phonenumber';
+import { PhoneNumber } from '../model/phonenumber';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,23 +19,23 @@ export class PhoneBookService {
   constructor(private http: HttpClient) { }
 
   // get phonebook
-  getPhoneBook(url: string): Observable<IPhoneNumber[]> {
-    return this.http.get<IPhoneNumber[]>(url)
+  getPhoneBook(url: string): Observable<PhoneNumber[]> {
+    return this.http.get<PhoneNumber[]>(url)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // get all phonenumber data
-  getAllPhoneNumbers(url: string): Observable<IPhoneNumber[]> {
-    return this.http.get<IPhoneNumber[]>(url)
+  getAllPhoneNumbers(url: string): Observable<PhoneNumber[]> {
+    return this.http.get<PhoneNumber[]>(url)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // insert new phonenumber details JSON.stringify(phonenumber)
-  addPhoneNumber(url: string, phonenumber: IPhoneNumber): Observable<any> {
+  addPhoneNumber(url: string, phonenumber: PhoneNumber): Observable<any> {
     return this.http.post(url, JSON.stringify(phonenumber), httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -43,7 +43,7 @@ export class PhoneBookService {
   }
 
   // update phonenumber details
-  updatePhoneNumber(url: string, id: number, phonenumber: IPhoneNumber): Observable<any> {
+  updatePhoneNumber(url: string, id: number, phonenumber: PhoneNumber): Observable<any> {
     const newurl = `${url}?id=${id}`;
     return this.http.put(newurl, phonenumber, httpOptions)
       .pipe(
