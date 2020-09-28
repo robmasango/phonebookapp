@@ -6,9 +6,9 @@ namespace PhoneBookApp.Model.Entities.PhoneBook
   public class PHB_PhoneBook : IEntityBase
   {
     [Key]
-    public int id { get; set; }
+    public int Id { get; set; }
     [Required]
-    public string name { get; set; }
+    public string Name { get; set; }
     public virtual ICollection<PHB_PhoneNumber> PhoneNumbers { get; set; }
   }
 }

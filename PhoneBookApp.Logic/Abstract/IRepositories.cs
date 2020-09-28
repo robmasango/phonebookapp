@@ -12,6 +12,7 @@ namespace PhoneBookApp.Logic.Abstract
         Task<PHB_PhoneBook> GetPhoneBookByID(int PhoneBookID);
         Task<int> CountPhoneBooks();
         Task AddPhoneBook(PHB_PhoneBook PHB_PhoneBook);
+        Task UpdatePhoneBook(PHB_PhoneBook PHB_PhoneBook);
         Task<List<PHB_PhoneBook>> GetPhoneBooksOrdered(string filter = null);
         Task<PHB_PhoneBook> GetFirstPhoneBook();
   }

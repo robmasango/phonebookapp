@@ -5,11 +5,11 @@ namespace PhoneBookApp.Web.Models
 {
   public class PhoneNumberViewModel
   {
-    public int id { get; set; }
-    public int phonebookid { get; set; }
-    public string name { get; set; }
-    public string email { get; set; }
-    public string number { get; set; }
+    public int Id { get; set; }
+    public int PhonebookId { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Number { get; set; }
 
     public PhoneNumberViewModel()
     {
@@ -23,23 +23,23 @@ namespace PhoneBookApp.Web.Models
 
     public PhoneNumberViewModel MapSinglePhoneNumber(PHB_PhoneNumber d)
     {
-      id = d.id;
-      phonebookid = d.phonebookid;
-      name = d.name;
-      email = d.email;
-      number = d.number;
+      Id = d.Id;
+      PhonebookId = d.PhonebookId;
+      Name = d.Name;
+      Email = d.Email;
+      Number = d.Number;
       return this;
     }
 
     public PHB_PhoneNumber ReverseMap()
     {
       return new PHB_PhoneNumber()
-      {
-        id = this.id,
-        phonebookid = this.phonebookid,
-        name = this.name,
-        email = this.email,
-        number = this.number,
+        {
+        Id = this.Id,
+        PhonebookId = this.PhonebookId,
+        Name = this.Name,
+        Email = this.Email,
+        Number = this.Number,
       };
     }
 
