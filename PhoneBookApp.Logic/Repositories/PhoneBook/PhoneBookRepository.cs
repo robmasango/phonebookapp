@@ -4,6 +4,8 @@ using PhoneBookApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PhoneBookApp.Logic.Repositories.PhoneBook
 {
@@ -17,58 +19,55 @@ namespace PhoneBookApp.Logic.Repositories.PhoneBook
             this._context = context;
         }
 
-        public PHB_PhoneBook GetPhoneBookByID(int id)
+        public async Task<PHB_PhoneBook> GetPhoneBookByID(int id)
         {
-            return FindSingle(subject => subject.id == id);
+            return await FindSingle(subject => subject.id == id);
         }
 
-        public List<PHB_PhoneBook> GetAllPhoneBooks()
+        public async Task<List<PHB_PhoneBook>> GetAllPhoneBooks()
         {
-            return LoadAll();
+            return await LoadAll();
         }
 
-        public PHB_PhoneBook GetFirstPhoneBook()
+        public async Task<PHB_PhoneBook> GetFirstPhoneBook()
         {
-          var PHB_PhoneBook = _context.Set<PHB_PhoneBook>()
-          .FirstOrDefault();
-
-          return PHB_PhoneBook;
+            return await FindSingle();
         }
 
-    public PHB_PhoneBook GetPhoneBook(string name)
+        public async Task<PHB_PhoneBook> GetPhoneBook(string name)
         {
-            return FindSingle(a => a.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return await FindSingle(a => a.name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
-        public int CountPhoneBooks()
+        public async Task<int> CountPhoneBooks()
         {
-            return _context.Set<PHB_PhoneBook>().Count();
+            return await _context.Set<PHB_PhoneBook>().CountAsync();
         }
 
-        public void AddPhoneBook(PHB_PhoneBook PHB_PhoneBook)
+        public async Task AddPhoneBook(PHB_PhoneBook PHB_PhoneBook)
         {
             Add(PHB_PhoneBook);
-            Commit();
+            await Commit();
         }
 
-        public void DeletePhoneBook(int Id)
+        public async Task DeletePhoneBook(int Id)
         {
             DeleteWhere(c => c.id == Id);
-            Commit();
+            await Commit();
         }
 
-        public void UpdatePhoneBook(PHB_PhoneBook PHB_PhoneBook)
+        public async Task UpdatePhoneBook(PHB_PhoneBook PHB_PhoneBook)
         {
             Update(PHB_PhoneBook);
-            Commit();
+            await Commit();
         }
         
 
-        public List<PHB_PhoneBook> GetPhoneBooksOrdered(string filter = null)
+        public async Task<List<PHB_PhoneBook>> GetPhoneBooksOrdered(string filter = null)
         {
-            var record = _context.Set<PHB_PhoneBook>()
+            var record = await _context.Set<PHB_PhoneBook>()
                .OrderBy(c => c.id)
-                .ToList();
+                .ToListAsync();
 
             return record;
         }                    
