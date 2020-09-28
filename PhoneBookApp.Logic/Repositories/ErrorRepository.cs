@@ -1,6 +1,7 @@
 ﻿using PhoneBookApp.Logic.Abstract;
 using PhoneBookApp.Model;
 using PhoneBookApp.Model.Entities.System;
+using System.Threading.Tasks;
 
 namespace PhoneBookApp.Logic.Repositories
 {
@@ -10,11 +11,11 @@ namespace PhoneBookApp.Logic.Repositories
         : base(context)
     { }
 
-    public override void Commit()
+    public async virtual new Task Commit()
     {
       try
       {
-        base.Commit();
+                await base.Commit();
       }
       catch { }
     }

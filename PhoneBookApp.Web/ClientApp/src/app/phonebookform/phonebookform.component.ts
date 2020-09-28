@@ -6,7 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } f
 
 import { PhoneBooklistComponent } from '../phonebooklist/phonebooklist.component';
 
-import { IPhoneNumber } from '../model/phonenumber';
+import { PhoneNumber } from '../model/phonenumber';
 import { PhoneBookService } from '../services/phonebook.service';
 import { DBOperation } from '../shared/DBOperation';
 import { Global } from '../shared/Global';
@@ -34,7 +34,7 @@ export class PhonebookformComponent implements OnInit {
     
     this.phonenumberFrm = this.fb.group({
       id: [''],
-      phonebookid: [''],
+      phoneBookId: [''],
       name: ['', [Validators.required, Validators.maxLength(50)]],
         email: ['', [Validators.required, Validators.email]],
         number: ['', [Validators.required, Validators.pattern("^((\\+27-?))?[0-9]{9}$")]]
@@ -148,9 +148,9 @@ export class PhonebookformComponent implements OnInit {
     isEnable ? this.phonenumberFrm.enable() : this.phonenumberFrm.disable();
   }
 
-    mapDateData(contact: IPhoneNumber): IPhoneNumber {
-        contact.id = contact.id == null ? 0 : contact.id;
-        contact.phonebookid = contact.phonebookid == null ? 0 : contact.phonebookid;
+    mapDateData(contact: PhoneNumber): PhoneNumber {
+        contact.id = contact.id === null ? 0 : contact.id;
+      contact.phoneBookId = contact.phoneBookId === null ? 0 : contact.phoneBookId;
         contact.number = contact.number.toString();
 
     return contact;

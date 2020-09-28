@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace PhoneBookApp.Logic.Repositories
 {
@@ -22,25 +23,25 @@ namespace PhoneBookApp.Logic.Repositories
         }
         #endregion
 
-        public List<T> FindMany(Expression<Func<T, bool>> predicate)
+        public async Task<List<T>> FindMany(Expression<Func<T, bool>> predicate)
         {
-            List<T> entities = _context.Set<T>().Where(predicate).ToList();
+            List<T> entities = await _context.Set<T>().Where(predicate).ToListAsync();
 
             return entities;
         }
 
-        public List<T> LoadAll()
+        public async Task<List<T>> LoadAll()
         {
-            var entities = _context.Set<T>().ToList();
+            var entities = await _context.Set<T>().ToListAsync();
 
             return entities;
         }
 
-        public virtual int Count()
+        public async virtual Task<int> Count()
         {
-            return _context.Set<T>().Count();
+            return await _context.Set<T>().CountAsync();
         }
-        public virtual IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
+        public  virtual IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -50,17 +51,21 @@ namespace PhoneBookApp.Logic.Repositories
             return query.AsEnumerable();
         }
 
-        public T FindSingle(int id)
+        public async Task<T> FindSingle()
         {
-            return _context.Set<T>().FirstOrDefault(x => x.id == id);
+            return await _context.Set<T>().FirstOrDefaultAsync();
+        }
+        public async Task<T> FindSingle(int id)
+        {
+            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public T FindSingle(Expression<Func<T, bool>> predicate)
+        public async Task<T> FindSingle(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().FirstOrDefault(predicate);
+            return await _context.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -68,18 +73,18 @@ namespace PhoneBookApp.Logic.Repositories
                 query = query.Include(includeProperty);
             }
 
-            return query.Where(predicate).FirstOrDefault();
+            return await query.Where(predicate).FirstOrDefaultAsync();
         }
 
-        public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
+        public async virtual  Task<IEnumerable<T>> FindBy(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().Where(predicate);
+            return await _context.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public virtual void Add(T entity)
+        public  virtual void Add(T entity)
         {
             EntityEntry dbEntityEntry = _context.Entry<T>(entity);
-            _context.Set<T>().Add(entity);
+             _context.Set<T>().Add(entity);
         }
 
         public virtual void Update(T entity)
@@ -103,9 +108,9 @@ namespace PhoneBookApp.Logic.Repositories
             }
         }
 
-        public virtual void Commit()
+        public async Task Commit()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -5,14 +5,14 @@ namespace PhoneBookApp.Model.Entities.PhoneBook
   {
 
     [Key]
-    public int id { get; set; }
-    public int phonebookid { get; set; }
+    public int Id { get; set; }
+    public int PhoneBookId { get; set; }
     [Required]
-    public string email { get; set; }
+    public string Email { get; set; }
     [Required]
-    public string name { get; set; }
+    public string Name { get; set; }
     [Required]
-    public string number { get; set; }
+    public string Number { get; set; }
     public virtual PHB_PhoneBook PhoneBook { get; set; }
   }
 }

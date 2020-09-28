@@ -10,7 +10,7 @@ namespace PhoneBookApp.Model.EntityMappings.System
         {
             modelBuilder.ToTable("SYS_Error", "dbo");
 
-            modelBuilder.HasKey(x => x.id);
+            modelBuilder.HasKey(x => x.Id);
 
             modelBuilder.Property(x => x.Message)
                 .HasMaxLength(100);

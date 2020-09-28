@@ -10,14 +10,14 @@ namespace PhoneBookApp.Model.EntityMappings.Lookup
     {
       modelBuilder.ToTable("PHB_PhoneNumber", "dbo");
 
-      modelBuilder.HasKey(x => x.id);
+      modelBuilder.HasKey(x => x.Id);
 
-      modelBuilder.Property(x => x.name)
+      modelBuilder.Property(x => x.Name)
           .HasMaxLength(100);
-      modelBuilder.Property(s => s.email)
+      modelBuilder.Property(s => s.Email)
           .HasMaxLength(100);
 
-      modelBuilder.Property(s => s.number)
+      modelBuilder.Property(s => s.Number)
           .HasMaxLength(100);
 
       modelBuilder.HasOne(x => x.PhoneBook)

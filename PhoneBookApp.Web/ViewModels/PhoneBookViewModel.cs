@@ -5,8 +5,8 @@ namespace PhoneBookApp.Web.Models
 {
   public class PhoneBookViewModel
   {
-    public int id { get; set; }
-    public string name { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; }
 
     public PhoneBookViewModel()
     {
@@ -19,8 +19,8 @@ namespace PhoneBookApp.Web.Models
 
     public PhoneBookViewModel MapSinglePhoneBook(PHB_PhoneBook phoneb)
     {
-      id = phoneb.id;
-      name = phoneb.name;
+      Id = phoneb.Id;
+      Name = phoneb.Name;
       return this;
     }
 
@@ -28,8 +28,8 @@ namespace PhoneBookApp.Web.Models
     {
       return new PHB_PhoneBook()
       {
-        id = this.id,
-        name = this.name,
+        Id = this.Id,
+        Name = this.Name,
       };
     }
 

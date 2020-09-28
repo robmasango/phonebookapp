@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using PhoneBookApp.Logic.Abstract;
 using PhoneBookApp.Web.Models;
 using PhoneBookApp.Model.Entities.System;
+using System.Threading.Tasks;
 
 namespace PhoneBookApp.Web.Controllers
 {
@@ -25,13 +26,13 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpGet("getPhoneBook")]
-    public IActionResult GetPhoneBook()
+    public async Task<IActionResult> GetPhoneBook()
     {
       _ = new ObjectResult(false);
 
       try
       {
-        var PhoneBook = _PhoneBookApi.GetFirstPhoneBook();
+        var PhoneBook = await _PhoneBookApi.GetFirstPhoneBook();
 
         if (PhoneBook == null)
         {
@@ -50,7 +51,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -58,13 +59,13 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpGet("getPhoneBookByID")]
-    public IActionResult GetPhoneBookByID(int Id)
+    public async Task<IActionResult> GetPhoneBookByID(int Id)
     {
       _ = new ObjectResult(false);
 
       try
       {
-        var PhoneBook = _PhoneBookApi.GetPhoneBookByID(Id);
+        var PhoneBook = await _PhoneBookApi.GetPhoneBookByID(Id);
 
         if (PhoneBook == null)
         {
@@ -83,7 +84,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -91,7 +92,7 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpGet("getPhoneBooks")]
-    public IActionResult GetPhoneBooks()
+    public async Task<IActionResult> GetPhoneBooks()
     {
       _ = new ObjectResult(false);
 
@@ -103,7 +104,7 @@ namespace PhoneBookApp.Web.Controllers
           return BadRequest(ModelState);
         }
 
-        var PhoneBooks = _PhoneBookApi.GetAllPhoneBooks();
+        var PhoneBooks = await _PhoneBookApi.GetAllPhoneBooks();
 
         if (PhoneBooks == null)
         {
@@ -119,7 +120,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -128,7 +129,7 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpPost("addPhoneBook")]
-    public IActionResult AddPhoneBook([FromBody]PhoneBookViewModel AddPhoneBook)
+    public async Task<IActionResult> AddPhoneBook([FromBody]PhoneBookViewModel AddPhoneBook)
     {
       _ = new ObjectResult(false);
 
@@ -139,7 +140,7 @@ namespace PhoneBookApp.Web.Controllers
           return BadRequest(ModelState);
         }
         else
-          _PhoneBookApi.AddPhoneBook(AddPhoneBook.ReverseMap());
+          await _PhoneBookApi.AddPhoneBook(AddPhoneBook.ReverseMap());
 
           return Ok(new { message = "Phone Book is added successfully." });
       }
@@ -147,7 +148,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -156,7 +157,7 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpPost("updatePhoneBook")]
-    public IActionResult UpdatePhoneBook([FromBody]PhoneBookViewModel PhoneBook)
+    public async Task<IActionResult> UpdatePhoneBook([FromBody]PhoneBookViewModel PhoneBook)
     {
       _ = new ObjectResult(false);
 
@@ -170,7 +171,7 @@ namespace PhoneBookApp.Web.Controllers
         {
           var newPhoneBook = PhoneBook.ReverseMap();
 
-          _PhoneBookApi.Update(newPhoneBook);
+          await _PhoneBookApi.UpdatePhoneBook(newPhoneBook);
 
           var PhoneBookvm = new PhoneBookViewModel(newPhoneBook);
 
@@ -181,7 +182,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -190,13 +191,13 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpDelete("deletePhoneBook")]
-    public IActionResult DeletePhoneBook(int Id)
+    public async Task<IActionResult> DeletePhoneBook(int Id)
     {
       _ = new ObjectResult(false);
 
       try
       {
-        var PhoneBook = _PhoneBookApi.GetPhoneBookByID(Id);
+        var PhoneBook = await _PhoneBookApi.GetPhoneBookByID(Id);
 
         if (PhoneBook == null)
         {
@@ -213,7 +214,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -225,13 +226,13 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpGet("getPhoneNumber")]
-    public IActionResult GetPhoneNumber(int Id)
+    public async Task<IActionResult> GetPhoneNumber(int Id)
     {
       _ = new ObjectResult(false);
 
       try
       {
-        var PhoneNumber = _PhoneNumberApi.GetPhoneNumberByID(Id);
+        var PhoneNumber = await _PhoneNumberApi.GetPhoneNumberByID(Id);
 
         if (PhoneNumber == null)
         {
@@ -249,7 +250,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -257,7 +258,7 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpGet("getAllPhoneNumbers")]
-    public IActionResult GetAllPhoneNumbers()
+    public async Task<IActionResult> GetAllPhoneNumbers()
     {
       _ = new ObjectResult(false);
 
@@ -269,7 +270,7 @@ namespace PhoneBookApp.Web.Controllers
           return BadRequest(ModelState);
         }
 
-        var PhoneNumbers = _PhoneNumberApi.GetAllPhoneNumbers();
+        var PhoneNumbers = await _PhoneNumberApi.GetAllPhoneNumbers();
 
         if (PhoneNumbers == null)
         {
@@ -286,7 +287,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -296,11 +297,11 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpGet("getPhoneBookNumbers")]
-    public IActionResult GetPhoneBookNumbers(int Id)
+    public async Task<IActionResult> GetPhoneBookNumbers(int Id)
     {
       try
       {
-        var PhoneNumber = _PhoneNumberApi.GetPhoneNumberByPhoneBookID(Id);
+        var PhoneNumber = await _PhoneNumberApi.GetPhoneNumberByPhoneBookID(Id);
 
         if (PhoneNumber == null)
         {
@@ -317,7 +318,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -325,7 +326,7 @@ namespace PhoneBookApp.Web.Controllers
 
     [HttpPost]
     [Route("addPhoneNumber")]
-    public IActionResult AddPhoneNumber([FromBody()]PhoneNumberViewModel item)
+    public async Task<IActionResult> AddPhoneNumber([FromBody()]PhoneNumberViewModel item)
     {
       try
       {
@@ -335,9 +336,9 @@ namespace PhoneBookApp.Web.Controllers
         }
         else
         {
-          var PhoneBook = _PhoneBookApi.GetFirstPhoneBook();
-          item.phonebookid = PhoneBook.id;
-          _PhoneNumberApi.AddPhoneNumber(item.ReverseMap());
+          var PhoneBook = await _PhoneBookApi.GetFirstPhoneBook();
+          item.PhoneBookId = PhoneBook.Id;
+          await _PhoneNumberApi.AddPhoneNumber(item.ReverseMap());
 
           return Ok(new { message = "PhoneNumber is added successfully." });
         }
@@ -347,7 +348,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -356,7 +357,7 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpPut("updatePhoneNumber")]
-    public IActionResult UpdatePhoneNumber(int id, [FromBody()]PhoneNumberViewModel item)
+    public async Task<IActionResult> UpdatePhoneNumber(int id, [FromBody()]PhoneNumberViewModel item)
     {
       try
       {
@@ -369,19 +370,19 @@ namespace PhoneBookApp.Web.Controllers
         {
           var updateditem = item.ReverseMap();
 
-          var phonebook = _PhoneBookApi.GetFirstPhoneBook();
-          var number = _PhoneNumberApi.GetPhoneNumberByID(id);
+          var phonebook = await _PhoneBookApi.GetFirstPhoneBook();
+          var number = await _PhoneNumberApi.GetPhoneNumberByID(id);
           if (number == null)
           {
             return NotFound(new { message = "Phone number not found" });
           }
 
-          number.phonebookid = phonebook.id;
-          number.name = updateditem.name;
-          number.email = updateditem.email;
-          number.number = updateditem.number;
+          number.PhoneBookId = phonebook.Id;
+          number.Name = updateditem.Name;
+          number.Email = updateditem.Email;
+          number.Number = updateditem.Number;
 
-          _PhoneNumberApi.UpdatePhoneNumber(number);
+          await _PhoneNumberApi.UpdatePhoneNumber(number);
 
           var updatednumber = new PhoneNumberViewModel(number);
 
@@ -392,7 +393,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
@@ -401,11 +402,11 @@ namespace PhoneBookApp.Web.Controllers
 
     [AllowAnonymous]
     [HttpDelete("deletePhoneNumber")]
-    public IActionResult DeletePhoneNumber(int Id)
+    public async Task<IActionResult> DeletePhoneNumber(int Id)
     {
       try
       {
-        var PhoneNumber = _PhoneNumberApi.GetPhoneNumberByID(Id);
+        var PhoneNumber = await _PhoneNumberApi.GetPhoneNumberByID(Id);
 
         if (PhoneNumber == null)
         {
@@ -413,7 +414,7 @@ namespace PhoneBookApp.Web.Controllers
         }
         else
         {
-          _PhoneNumberApi.DeletePhoneNumber(PhoneNumber.id);
+         await _PhoneNumberApi.DeletePhoneNumber(PhoneNumber.Id);
 
           return Ok(new { message = "PhoneNumber is deleted successfully." });
         }
@@ -421,7 +422,7 @@ namespace PhoneBookApp.Web.Controllers
       catch (Exception ex)
       {
         _loggingApi.Add(new SYS_Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedDate = DateTime.Now });
-        _loggingApi.Commit();
+        await _loggingApi.Commit();
 
         return NotFound(new { message = "An error occured" });
       }
